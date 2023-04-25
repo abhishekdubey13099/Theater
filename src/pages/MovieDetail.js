@@ -7,7 +7,8 @@ export const MovieDetail = () => {
     const params = useParams();
     const [movie, setMovie] = useState({});
 
-    useTitle(movie.title);
+    //eslint-disable-next-line
+    const pageTitle = useTitle(movie.title);
     const image = movie.poster_path ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : Backup;
 
     useEffect(() => {
@@ -15,6 +16,7 @@ export const MovieDetail = () => {
             const response = await fetch(`https://api.themoviedb.org/3/movie/${params.id}?api_key=a6fb82555a4065507532898ecf997eef&language=en-US`);
             const json = await response.json();
             setMovie(json);
+            console.log(json);
         }
         fetchMovie();
     }, [params.id]);
